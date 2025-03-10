@@ -1,4 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initialTheme = savedTheme || systemTheme;
+    
+    body.setAttribute('data-theme', initialTheme);
+    
+    // Update theme toggle icon based on current theme
+    updateThemeIcon();
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        const newSystemTheme = e.matches ? 'dark' : 'light';
+        const currentTheme = body.getAttribute('data-theme');
+        
+        // Only update if no theme is saved
+        if (!savedTheme && currentTheme !== newSystemTheme) {
+            body.setAttribute('data-theme', newSystemTheme);
+            updateThemeIcon();
+        }
+    });
+    
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon();
+    });
+    
+    function updateThemeIcon() {
+        const isDark = body.getAttribute('data-theme') === 'dark';
+        themeToggle.innerHTML = isDark ? '☀️' : '🌙';
+    }
+    
     const qrText = document.getElementById('qrText');
     const generateBtn = document.getElementById('generateBtn');
     const qrCodeDiv = document.getElementById('qrCode');
