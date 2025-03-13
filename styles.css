@@ -134,7 +134,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
 }
 
 body {
@@ -145,39 +145,64 @@ body {
     align-items: center;
     overflow: hidden;
     transition: background-color 0.3s ease;
+    position: relative;
+}
+
+/* Add subtle background pattern */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(var(--overlay0) 1px, transparent 1px),
+        radial-gradient(var(--overlay0) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    opacity: 0.05;
+    z-index: -1;
 }
 
 .theme-toggle {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: var(--surface0);
+    background-color: var(--surface2);
     color: var(--text);
     border: none;
     padding: 0.8rem;
-    border-radius: 7px;
+    border-radius: 50%;
     cursor: pointer;
     font-size: 1.2rem;
     transition: all 0.3s ease, background-color 0.3s ease, color 0.3s ease;
     z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .theme-toggle:hover {
-    background-color: var(--surface1);
-    transform: scale(1.1);
+    background-color: var(--mauve);
+    transform: scale(1.1) rotate(15deg);
 }
 
 .container {
-    background-color: var(--surface0);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(145deg, var(--surface0), var(--surface1));
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 600px;
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 0.6s ease-out forwards;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--surface3);
 }
 
 @keyframes fadeInUp {
@@ -198,6 +223,10 @@ h1 {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.6s ease-out 0.2s forwards;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .input-section {
@@ -209,50 +238,81 @@ h1 {
 
 input {
     width: 100%;
-    padding: 1rem;
-    border: 1px solid var(--overlay1);
-    border-radius: 5px;
-    margin-bottom: 1rem;
+    padding: 1.2rem;
+    border: 2px solid var(--overlay1);
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
     font-size: 1rem;
     background-color: var(--surface1);
     color: var(--text);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 input:focus {
     outline: none;
     border-color: var(--mauve);
-    box-shadow: 0 0 0 2px var(--overlay1);
+    box-shadow: 0 0 0 3px rgba(203, 166, 247, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+input::placeholder {
+    color: var(--overlay2);
 }
 
 button {
-    background-color: var(--mauve);
+    background: linear-gradient(135deg, var(--mauve), var(--lavender));
     color: var(--base);
     border: none;
-    padding: 1rem 2rem;
-    border-radius: 7px;
+    padding: 1.2rem 2rem;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 1rem;
-    transition: all 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+    transition: all 0.3s ease;
     transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(203, 166, 247, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
 }
 
 button:hover {
-    background-color: var(--lavender);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, var(--lavender), var(--mauve));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(203, 166, 247, 0.4);
+}
+
+button:hover::before {
+    left: 100%;
 }
 
 button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(203, 166, 247, 0.3);
+}
+
+#generateBtn {
+    width: 100%;
 }
 
 .qr-section {
     text-align: center;
     opacity: 0;
     transform: scale(0.9);
-    animation: fadeInScale 0.6s ease-out forwards;
+    animation: fadeInScale 0.6s ease-out 0.6s forwards;
+    margin-top: 1rem;
+    min-height: 100px;
 }
 
 @keyframes fadeInScale {
@@ -267,12 +327,89 @@ button:active {
 }
 
 #qrCode {
-    margin-bottom: 1rem;
-    transition: transform 0.3s ease;
+    margin: 1.5rem auto;
+    transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    /* Hide the QR code container initially */
+    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+#qrCode.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+#qrCode::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes shine {
+    0% {
+        top: -50%;
+        left: -50%;
+    }
+    100% {
+        top: 150%;
+        left: 150%;
+    }
 }
 
 #qrCode img {
     transition: transform 0.3s ease;
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+#qrCode:hover img {
+    transform: scale(1.05);
+}
+
+#downloadBtn {
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#downloadBtn::after {
+    content: '↓';
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+#downloadBtn:hover::after {
+    transform: translateY(3px);
+}
+
+#downloadBtn:hover {
+    background: linear-gradient(135deg, var(--teal), var(--green));
 }
 
 .hidden {
@@ -281,10 +418,75 @@ button:active {
 
 @media (max-width: 480px) {
     .container {
-        padding: 1rem;
+        padding: 1.5rem;
+        margin: 1rem;
+        border-radius: 12px;
     }
     
     button {
         width: 100%;
+        padding: 1rem 1.5rem;
     }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Theme transition */
+.theme-transition {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.theme-transition * {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Icon animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.icon-spin {
+    animation: spin 0.5s ease-out;
+}
+
+/* Error animation */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+input.error {
+    animation: shake 0.5s ease-in-out;
+    border-color: var(--red) !important;
+    background-color: rgba(243, 139, 168, 0.1) !important;
+}
+
+/* Button disabled state */
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(203, 166, 247, 0.2) !important;
 }

@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="A beautiful QR code generator with Catppuccin Mocha theme">
 </head>
 <body>
-    <button id="themeToggle" class="theme-toggle">
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
         <span class="icon">☀️</span>
     </button>
     <div class="container">
         <h1>QR Code Generator</h1>
         <div class="input-section">
-            <input type="text" id="qrText" placeholder="Enter text or URL">
+            <input type="text" id="qrText" placeholder="Enter text or URL" aria-label="Text or URL for QR code">
             <button id="generateBtn">Generate QR Code</button>
         </div>
         <div class="qr-section">
