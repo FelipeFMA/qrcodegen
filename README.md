@@ -28,7 +28,7 @@ A modern and responsive QR code generator, developed with HTML, CSS and JavaScri
 
 ## Screenshot
 
-![QR Code Generator](screenshot.png)
+![image](https://github.com/user-attachments/assets/77758e12-2f4e-4682-915b-a31aa77f6ad2)
 
 ## License
 
